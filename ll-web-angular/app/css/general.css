@@ -1,0 +1,10 @@
+tr .center-all {
+	text-align: center;
+	margin-left: auto;
+    margin-right: auto;
+    /* width: 1400px; */
+}
+
+.align-right {
+	text-align: right;
+}
