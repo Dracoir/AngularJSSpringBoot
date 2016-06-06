@@ -25,9 +25,9 @@ buildscript {
 //---------------------------------------------------------------------------------------------------------------------------------
 apply plugin: 'java'
 //apply plugin: 'eclipse'
-apply plugin: 'idea'
 apply plugin: 'maven'
-apply plugin: 'spring-boot' 
+apply plugin: 'spring-boot'
+apply plugin: 'idea'
 apply plugin: 'war'
 apply plugin: 'project-report'
 apply plugin: 'net.saliman.cobertura'
@@ -52,7 +52,7 @@ configurations {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}") // Adds additional, useful endpoints
 	compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
-    compile("org.springframework.boot:spring-boot-starter-jersey")
+    compile("org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}")
 	compile("com.ricardorodriguezfl.lunchnlearn:ll-model:0.0.1")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")

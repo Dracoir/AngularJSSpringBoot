@@ -25,7 +25,21 @@ public class PersonService {
 	public List<Person> getAllPersons() {
 		return (List<Person>)personRepository.findAll();
 	}
-	
+
+	/**
+	 * Return a person based on first name
+	 * @param lastName String representing the Person's last name
+	 * @return Person
+     */
+	public Person findByLastName(String lastName) { return personRepository.findByLastName(lastName); }
+
+	/**
+	 * Return a person based on first name
+	 * @param firstName String representing Person's first name
+	 * @return Person
+     */
+	public Person findByFirstName(String firstName) { return personRepository.findByFirstName(firstName); }
+
 	/**
 	 * Return person 
 	 * @param personId Long representing the row of the person in the database
