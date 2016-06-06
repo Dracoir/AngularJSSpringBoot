@@ -1,0 +1,193 @@
+/*
+ * Build script responsible for building the models library for the Spring Boot Lunch and Learn
+ *
+ * This simple project represents a models layer
+ * 
+ */
+
+//---------------------------------------------------------------------------------------------------------------------------------
+buildscript {
+    ext {
+        springBootVersion = '1.2.5.RELEASE'
+		wrapperVersion = '2.3'
+		jarGroupId = 'com.ricardorodriguezfl.lunchnlearn'
+		jarArtifactId = 'll-model'
+		jarVersion = '0.0.1'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE")
+		classpath("net.saliman:gradle-cobertura-plugin:2.2.7")
+    }
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------
+apply plugin: 'java'
+// apply plugin: 'eclipse'
+apply plugin: 'project-report'
+apply plugin: 'maven'
+apply plugin: 'spring-boot'
+apply plugin: 'findbugs'
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'net.saliman.cobertura'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+description = 'The shared API for the Spring Boot REST application'
+
+//---------------------------------------------------------------------------------------------------------------------------------
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+	compile("com.h2database:h2:1.3.156")
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}") 
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// NOTE: Uncomment if you are using the Eclipse IDE, as well as the Eclipse plugin.  Don't forget to comment the IDEA plugin if you
+//       use Eclipse
+//eclipse {
+//    classpath {
+//         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+//         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+//    }
+//}
+
+//---------------------------------------------------------------------------------------------------------------------------------
+jar {
+	manifest {
+		attributes("Implementation-Title": project.name,
+				   "Implementation-Version": jarVersion,
+                   "Created-By": "Ricardo Rodriguez",
+				   "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
+	}
+	baseName = jarArtifactId
+	version = jarVersion
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+task sourcesJar(type: Jar, dependsOn: classes) {
+	baseName = jarArtifactId
+	version = jarVersion
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	description 'Generates project JavaDocs'
+	baseName = jarArtifactId
+	version = jarVersion
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+artifacts {
+	archives sourcesJar
+	archives javadocJar
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------
+task wrapper(type: Wrapper) {
+	description 'Generates a wrapper version for Gradle ' + wrapperVersion
+    gradleVersion = wrapperVersion
+}
+
+//---------------------------------------------------------------------------------------------------------------------------------
+install {
+	repositories.mavenInstaller {
+		pom.project {
+			parent {
+			  groupId 'org.springframework.boot'
+			  artifactId 'spring-boot-starter-parent'
+			  version "${springBootVersion}"
+			}
+		}
+		pom.groupId = jarGroupId
+		pom.artifactId = jarArtifactId
+		pom.version = jarVersion
+	}
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+cobertura {
+    coverageFormats = ['xml', 'html']
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+findbugsMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+checkstyleMain {
+    ignoreFailures = true
+    doLast {
+        ant.xslt(in: "$buildDir/reports/checkstyle/main.xml",
+                style:"config/checkstyle/checkstyle.xsl",
+                out:"$buildDir/reports/checkstyle/checkstyle.html"
+        )
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+checkstyleTest {
+    ignoreFailures = true
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+pmd {
+    ruleSets = [
+            'java-android',
+            'java-basic',
+            'java-braces',
+            'java-clone',
+            'java-codesize',
+            'java-comments',
+            'java-controversial',
+            'java-coupling',
+            'java-design',
+            'java-empty',
+            'java-finalizers',
+            'java-imports',
+            'java-j2ee',
+            'java-javabeans',
+            'java-junit',
+            'java-logging-jakarta-commons',
+            'java-logging-java',
+            'java-migrating',
+            'java-naming',
+            'java-optimizations',
+            'java-strictexception',
+            'java-strings',
+            'java-sunsecure',
+            'java-typeresolution',
+            'java-unnecessary',
+            'java-unusedcode'
+    ]
+    toolVersion = '5.1.1'
+    ignoreFailures = true
+}
+
+//-------------------------------------------------------------------------------------------------------------------------
+// Generate sources JAR before building the JAR
+jar.dependsOn sourcesJar
+
+//-------------------------------------------------------------------------------------------------------------------------
+// Tasks executed when Gradle is not given a specific task to run
+defaultTasks 'clean', 'build', 'install'
+

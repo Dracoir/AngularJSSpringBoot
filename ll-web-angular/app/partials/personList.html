@@ -1,0 +1,63 @@
+    <!-- Page header -->
+<div class="jumbotron">
+  <h1 align="center">AngularJS and Spring Boot</h1>
+</div>
+
+<!-- Beginning of contrroller -->
+<div ng-controller="personListCtrl">
+
+  <!-- Page title -->
+  <div class="page-header" style="text-align: center;">
+    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span>List of Persons</h1>
+    <button type="button" class="btn btn-default align-right" ng-click="addPerson()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Person
+    </button>
+  </div>
+  
+  <!-- Nummber of persons added -->
+  <div class="row center-all">
+    <div class="centered-pills" ng-model="personList">
+     <ul class="nav nav-pills" role="tablist">
+      <li role="presentation"><a href="#/">Number of Persons 
+         <span class="badge">
+             {{personList.length}}
+         </span></a></li>
+     </ul>
+    </div>
+  </div>
+  
+  <!-- Action messages -->
+  <div class="alert alert-success alert-dismissible" ng-show="transationMsg" ng-model="transationMsg" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{transationMsg}}
+  </div>
+  
+  <!-- Start Persons list from the database -->
+  <div class="row center-all">
+   <div class="centered-pills">
+      <!-- Begin loop -->
+          <table class="table table-stripped center-all" >
+  		     <tr>
+  	           <th>No</th>
+  	           <th>First</th>
+  	           <th>Last</th>
+  	           <th>Actions</th>
+  		     </tr>   
+               <tr ng-repeat="person in personList">
+                   <td>{{person.id}}</td>
+                   <td>{{person.firstName}}</td>
+                   <td>{{person.lastName}}</td>
+                   <td>
+  	              <a href ng-click="editPerson(person.id,person.firstName,person.lastName)"><span class="glyphicon glyphicon-pencil"></span></a>
+  	                &nbsp;&nbsp;&nbsp;&nbsp;
+  	              <a href ng-click="deletePerson(person.id)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
+  	            </td>
+               </tr>
+          </table>
+      <!-- End loop -->
+   </div>
+  <div>
+  <!-- End Persons list from the database -->
+
+</div>
+<!-- End of controller div -->

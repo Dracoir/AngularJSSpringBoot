@@ -1,0 +1,14 @@
+logs/*
+!.gitkeep
+node_modules/
+tmp
+.project
+.settings
+.eclipse
+.idea
+.DS_Store
+.gradle
+build
+dist
+out
+bower_components

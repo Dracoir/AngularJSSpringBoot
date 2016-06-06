@@ -1,0 +1,26 @@
+<!-- Page header -->
+<div class="jumbotron">
+  <h1 align="center">AngularJS and Spring Boot</h1>
+</div>
+
+<div ng-controller="personEditCtrl">
+  <!-- Page title -->
+  <div class="page-header" style="text-align: center;">
+    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Edit/Add Person</h1>
+    <button type="button" class="btn btn-default align-right" ng-click="personList()">
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Person List
+    </button>
+  </div>
+
+<!-- Start Main content -->
+  <div class="alert alert-success" ng-show='transationMsg' ng-model="transationMsg" role="alert">{{transationMsg}}</div>
+  <form>
+    <input type="text" hidden ng-model="personForm.id" placeholder="">
+    <input type="text" ng-model="personForm.firstName" placeholder="First Name">
+    <input type="text" ng-model="personForm.lastName" placeholder="Last Name">
+    <button type="submit" class="btn btn-default" ng-disabled="incomplete" ng-click="submitPerson()">
+      <span class="glyphicon glyphicon-save"></span>  Save Changes
+    </button>  
+  </form>
+</div>
+<!-- End Main content -->
