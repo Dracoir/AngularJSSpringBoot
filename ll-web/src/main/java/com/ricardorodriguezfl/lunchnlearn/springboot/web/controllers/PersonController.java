@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
 
 	private PersonService personService;
-	
+
 	/**
 	 * Default method when accessing /people_rest
 	 * @return List&lt;Person&gt;

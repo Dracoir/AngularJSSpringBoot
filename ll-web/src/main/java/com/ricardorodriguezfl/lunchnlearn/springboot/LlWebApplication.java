@@ -4,7 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 @SpringBootApplication
 @PropertySource({"classpath:data.properties", "classpath:application.properties"})
+@Import(RepositoryRestMvcConfiguration.class)
 public class LlWebApplication {
 
     @Bean 

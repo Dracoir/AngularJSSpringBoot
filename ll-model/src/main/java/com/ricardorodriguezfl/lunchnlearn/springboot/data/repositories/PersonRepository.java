@@ -3,6 +3,7 @@ package com.ricardorodriguezfl.lunchnlearn.springboot.data.repositories;
 
 import com.ricardorodriguezfl.lunchnlearn.springboot.data.models.Person;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,8 +15,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
-	public Person findById(Long id);
-	public Person findByLastName(String lastName);
-	public Person findByFirstName(String firstName);
-	
+	Person findById(Long id);
+	Person findByLastName(String lastName);
+	Person findByFirstName(String firstName);
+
 }
