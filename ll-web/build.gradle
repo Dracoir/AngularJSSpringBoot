@@ -6,17 +6,17 @@
  */
 buildscript {
     ext {
-        springBootVersion = '1.2.5.RELEASE'
+        springBootVersion = '1.3.5.RELEASE'
 		wrapperVersion = '2.3'
 		warGroupId = 'com.ricardorodriguezfl.lunchnlearn'
 		warArtifactId = 'll-web'
-		warVersion = '0.0.1'
+		warVersion = '0.0.2'
     }
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE")
 		classpath("net.saliman:gradle-cobertura-plugin:2.2.7")
     }
@@ -52,8 +52,7 @@ configurations {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}") // Adds additional, useful endpoints
 	compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
-    //compile("org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}")
-	compile("com.ricardorodriguezfl.lunchnlearn:ll-model:0.0.1")
+	compile("com.ricardorodriguezfl.lunchnlearn:ll-model:0.0.2")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }

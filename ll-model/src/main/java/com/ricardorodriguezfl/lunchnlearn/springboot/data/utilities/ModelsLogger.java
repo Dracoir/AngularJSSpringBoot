@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class MyLogger {
+public class ModelsLogger {
 
 	/** Handle to the log file */
     private final Log log = LogFactory.getLog(getClass());
 
-    public MyLogger () {}
+    public ModelsLogger() {}
 
     /** Executed at the beginning of every method call, for the given package **/
     @Before("execution(* com.ricardorodriguezfl.lunchnlearn..*.*(..))")
