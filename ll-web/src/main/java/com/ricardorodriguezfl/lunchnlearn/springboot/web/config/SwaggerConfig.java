@@ -8,13 +8,16 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author Ricardo "Rick" Rodriguez
  * @since 6/10/16.
  */
 @Configuration
+@EnableSwagger2
 public class SwaggerConfig {
+
     //-----------------------------------------------------------------------------------------------------------------
     @Bean
     public Docket newsApi() {
@@ -33,13 +36,11 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Person Repository")
                 .description("Spring REST implementating, using Swagger")
-                .termsOfServiceUrl("http://<termsOfServiceLink>")
+                .termsOfServiceUrl("#")
                 .contact("Ricardo Rodriguez")
                 .license("Apache License Version 2.0")
-                .licenseUrl("https://<licenseLink>")
+                .licenseUrl("#")
                 .version("1.0")
                 .build();
     }
-
-
 }

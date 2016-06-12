@@ -1,4 +1,4 @@
-package com.ricardorodriguezfl.lunchnlearn.springboot.web.controllers;
+package com.ricardorodriguezfl.lunchnlearn.springboot.web.filter;
 
 import java.io.IOException;
 
