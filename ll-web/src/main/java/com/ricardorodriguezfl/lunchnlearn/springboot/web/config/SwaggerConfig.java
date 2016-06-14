@@ -1,7 +1,7 @@
 package com.ricardorodriguezfl.lunchnlearn.springboot.web.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author Ricardo "Rick" Rodriguez
  * @since 6/10/16.
  */
-@Configuration
+@Component
 @EnableSwagger2
 public class SwaggerConfig {
 
