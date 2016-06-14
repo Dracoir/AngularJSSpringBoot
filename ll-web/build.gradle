@@ -52,6 +52,7 @@ configurations {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}") // Adds additional, useful endpoints
 	compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-configuration-processor")
 	compile("com.ricardorodriguezfl.lunchnlearn:ll-model:0.0.4")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
     testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")

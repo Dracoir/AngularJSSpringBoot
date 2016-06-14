@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ricardorodriguezfl.lunchnlearn.springboot.data.models.Person;
 import com.ricardorodriguezfl.lunchnlearn.springboot.data.services.PersonService;
+import com.ricardorodriguezfl.lunchnlearn.springboot.web.config.SampleProperties;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PersonController {
 
 	private PersonService personService;
+	private SampleProperties sampleProperties;
 
     //----------------------------------------------------------------------------------------------------------------
 	/**
@@ -37,6 +39,7 @@ public class PersonController {
 			@ApiResponse(code = 500, message = "Failure")})
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Person> getPeople() {
+		System.out.println("Sample property: " + sampleProperties.getFirstName());
 		return personService.getAllPersons();
 	}
 
@@ -57,9 +60,7 @@ public class PersonController {
 			@ApiResponse(code = 404, message = "Not Found"),
 			@ApiResponse(code = 500, message = "Failure")})
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Person getPerson(@PathVariable("id") Long id) {
-		return personService.getPersonById(id);
-	}
+	public Person getPerson(@PathVariable("id") Long id) { return personService.getPersonById(id); }
 
     //----------------------------------------------------------------------------------------------------------------
 	/**
@@ -142,4 +143,8 @@ public class PersonController {
 		this.personService = personService;
 	}
 
+	@Autowired
+	public void setSampleProperties(SampleProperties sampleProperties) {
+		this.sampleProperties = sampleProperties;
+	}
 }
